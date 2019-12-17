@@ -34,6 +34,15 @@ class MicroFrontend extends React.Component {
     window[`render${name}`](`${name}-container`, history);
   };
 
+  static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    console.log('ERROR', info, error);
+  }
+
   render() {
     return <main id={`${this.props.name}-container`} />;
   }
